@@ -266,7 +266,7 @@ Never commit .env or API keys to GitHub.
 An example environment file is included as .env.example.
 Local Setup
 1. Clone the repository
-git clone https://github.com/akdss-AI/ai-email-reply-drafting-api.git
+git clone [https://github.com/akdss-AI/AI-Email-Reply-Assistant.git]
 cd ai-email-reply-drafting-api
 2. Create a virtual environment
 Windows:
