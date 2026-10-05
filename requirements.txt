@@ -4,6 +4,6 @@ sqlalchemy
 psycopg2-binary
 python-dotenv
 pydantic
-passlib[bcrypt==4.3.0]
+passlib[bcrypt]
 python-jose[cryptography]
 groq
