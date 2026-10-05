@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Email Reply Assistant</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container" id="dashboard-container">
+        <header class="topbar">
+            <h1>AI Email Reply Assistant</h1>
+            <div class="topbar-right">
+                <button id="logout-btn">Logout</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <button id="new-session-btn">+ New Session</button>
+                </div>
+                <div class="session-list" id="session-list">
+                    <!-- Sessions loaded here -->
+                </div>
+            </aside>
+
+            <main class="workspace">
+                <div class="workspace-inner">
+                    
+                    <section class="history-section" id="history-section">
+                        <div class="history-header">Conversation History</div>
+                        <div class="message-history" id="message-history">
+                            <div class="empty-state">Select or create a session to start.</div>
+                        </div>
+                    </section>
+
+                    <section class="draft-section">
+                        <h2 class="section-title">Draft an Email Reply</h2>
+                        
+                        <div class="form-group">
+                            <label for="incoming-email">Incoming Email</label>
+                            <textarea id="incoming-email" placeholder="Paste the email you received here..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="instruction">Your Reply Instructions</label>
+                            <textarea id="instruction" placeholder="E.g., Tell them I am available next Tuesday at 10 AM."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tone">Tone</label>
+                            <select id="tone">
+                                <option value="professional">Professional</option>
+                                <option value="friendly">Friendly</option>
+                                <option value="formal">Formal</option>
+                                <option value="casual">Casual</option>
+                            </select>
+                        </div>
+
+                        <button id="generate-btn">Generate Reply</button>
+                    </section>
+
+                    <section class="reply-container" id="reply-container">
+                        <h2>Generated Reply</h2>
+                        <div class="reply-content">
+                            <div><strong>Subject:</strong> <span id="reply-subject"></span></div>
+                            <div id="reply-greeting"></div>
+                            <div id="reply-body"></div>
+                            <div id="reply-closing"></div>
+                        </div>
+                        <button id="copy-btn">Copy Reply</button>
+                    </section>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
