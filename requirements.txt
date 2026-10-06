@@ -7,6 +7,7 @@ python-dotenv
 pydantic
 email-validator
 passlib[bcrypt]
+bcrypt==4.0.1
 python-jose[cryptography]
 groq
 python-multipart
