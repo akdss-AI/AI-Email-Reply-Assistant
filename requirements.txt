@@ -5,7 +5,7 @@ psycopg2-binary
 psycopg[binary]
 python-dotenv
 pydantic
+email-validator
 passlib[bcrypt]
 python-jose[cryptography]
-email-validator
 groq
