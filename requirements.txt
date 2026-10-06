@@ -9,3 +9,4 @@ email-validator
 passlib[bcrypt]
 python-jose[cryptography]
 groq
+python-multipart
