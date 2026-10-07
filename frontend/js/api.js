@@ -25,6 +25,22 @@ async function apiFetch(endpoint, options = {}) {
     const MAX_RETRIES = 3;
     const RETRY_DELAY = 3000;
 
+    // Get the status message element if it exists on this page
+    const serverStatus = document.getElementById("server-status");
+
+    function showServerStatus(message) {
+        if (serverStatus) {
+            serverStatus.textContent = message;
+            serverStatus.classList.remove("hidden");
+        }
+    }
+
+    function hideServerStatus() {
+        if (serverStatus) {
+            serverStatus.classList.add("hidden");
+        }
+    }
+
     for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
 
         try {
@@ -101,6 +117,7 @@ async function apiFetch(endpoint, options = {}) {
             // -----------------------------
             // SUCCESS
             // -----------------------------
+            hideServerStatus();
             return data;
 
         } catch (error) {
@@ -110,6 +127,10 @@ async function apiFetch(endpoint, options = {}) {
                 error.name === "TypeError";
 
             if (isConnectionError && attempt < MAX_RETRIES) {
+
+                showServerStatus(
+                    `⏳ Waking up the server... Attempt ${attempt} of ${MAX_RETRIES - 1}`
+                );
 
                 console.log(
                     `Server connection failed. Retry ${attempt}/${MAX_RETRIES - 1}...`
@@ -123,11 +144,20 @@ async function apiFetch(endpoint, options = {}) {
             }
 
             if (isConnectionError) {
+
+                showServerStatus(
+                    "⚠️ The server is taking longer than expected. Please try again."
+                );
+
                 throw new Error(
                     "Unable to connect to the server. The server may be waking up. Please try again in a few moments."
                 );
             }
 
+            throw error;
+        }
+    }
+}
             throw error;
         }
     }
