@@ -25,7 +25,6 @@ async function apiFetch(endpoint, options = {}) {
     const MAX_RETRIES = 4;
     const RETRY_DELAY = 3000;
 
-    // Get the status message element if it exists on this page
     const serverStatus = document.getElementById("server-status");
 
     function showServerStatus(message) {
@@ -42,7 +41,6 @@ async function apiFetch(endpoint, options = {}) {
     }
 
     for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
-
         try {
             const response = await fetch(`${API_BASE_URL}${endpoint}`, {
                 ...options,
@@ -121,32 +119,29 @@ async function apiFetch(endpoint, options = {}) {
             return data;
 
         } catch (error) {
-
             const isConnectionError =
                 error.message === "Failed to fetch" ||
                 error.name === "TypeError";
 
             if (isConnectionError && attempt < MAX_RETRIES) {
+                const retryNumber = attempt;
 
-               const retryNumber = attempt;
+                showServerStatus(
+                    `⏳ Waking up the server... Retrying (${retryNumber}/3)`
+                );
 
-               showServerStatus(
-                     `⏳ Waking up the server... Retrying (${retryNumber}/3)`
-               );
-
-               console.log(
+                console.log(
                     `Server connection failed. Retry ${retryNumber}/3...`
-               );
+                );
 
-               await new Promise(resolve =>
+                await new Promise(resolve =>
                     setTimeout(resolve, RETRY_DELAY)
-               );
+                );
 
-               continue;
-           }
+                continue;
+            }
 
             if (isConnectionError) {
-
                 showServerStatus(
                     "⚠️ The server is taking longer than expected. Please try again."
                 );
