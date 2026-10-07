@@ -22,7 +22,7 @@ async function apiFetch(endpoint, options = {}) {
         headers["Content-Type"] = "application/json";
     }
 
-    const MAX_RETRIES = 3;
+    const MAX_RETRIES = 4;
     const RETRY_DELAY = 3000;
 
     // Get the status message element if it exists on this page
@@ -128,20 +128,22 @@ async function apiFetch(endpoint, options = {}) {
 
             if (isConnectionError && attempt < MAX_RETRIES) {
 
-                showServerStatus(
-                    `⏳ Waking up the server... Attempt ${attempt} of ${MAX_RETRIES - 1}`
-                );
+               const retryNumber = attempt;
 
-                console.log(
-                    `Server connection failed. Retry ${attempt}/${MAX_RETRIES - 1}...`
-                );
+               showServerStatus(
+                     `⏳ Waking up the server... Retrying (${retryNumber}/3)`
+               );
 
-                await new Promise(resolve =>
+               console.log(
+                    `Server connection failed. Retry ${retryNumber}/3...`
+               );
+
+               await new Promise(resolve =>
                     setTimeout(resolve, RETRY_DELAY)
-                );
+               );
 
-                continue;
-            }
+               continue;
+           }
 
             if (isConnectionError) {
 
