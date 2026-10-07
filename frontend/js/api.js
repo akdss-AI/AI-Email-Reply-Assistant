@@ -120,9 +120,7 @@ async function apiFetch(endpoint, options = {}) {
 
         } catch (error) {
             const isConnectionError =
-                error.message === "Failed to fetch" ||
-                error.name === "TypeError";
-
+                error.message === "Failed to fetch"
             if (isConnectionError && attempt < MAX_RETRIES) {
                 const retryNumber = attempt;
 
