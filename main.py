@@ -11,7 +11,7 @@ app.add_middleware(
     allow_origins=[
         "http://127.0.0.1:8080",
         "http://localhost:8080",
-        "https://ai-email-reply-assistant-frontend-41shv6lkd-aq-6178.vercel.app",
+        "https://ai-email-reply-assistant-frontend-5n1eua4ki-aq-6178.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
