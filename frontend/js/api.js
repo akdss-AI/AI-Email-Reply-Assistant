@@ -155,7 +155,4 @@ async function apiFetch(endpoint, options = {}) {
         }
     }
 }
-            throw error;
-        }
-    }
-}
+
