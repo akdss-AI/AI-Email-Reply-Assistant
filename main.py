@@ -28,4 +28,4 @@ Base.metadata.create_all(bind=engine)
 
 @app.get("/")
 def root():
-    return {"message": "AI Email Reply Draft API is running"}
+    return {"message": "AI Email Reply Draft API is running!"}
